@@ -3,6 +3,7 @@ import 'dart:io' show Platform;
 import 'package:bitcoin_ticker/coin_data.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PriceScreen extends StatefulWidget {
   @override
@@ -66,7 +67,7 @@ class _PriceScreenState extends State<PriceScreen> {
       backgroundColor: Colors.lightBlue,
       itemExtent: 32.0,
       onSelectedItemChanged: (selectedIndex) {
-//        selectedCurrency = get
+//        selectedCurrency = selectedIndex
       },
       children: myPickerItems,
     );
@@ -103,6 +104,19 @@ class _PriceScreenState extends State<PriceScreen> {
               ),
             ),
           ),
+          Center(
+              child: InkWell(
+            onTap: () {
+              launch('https://www.coindesk.com/price/bitcoin');
+            },
+            child: Text(
+              'Powered by CoinDesk',
+              style: TextStyle(
+                color: Colors.lightBlue,
+                fontSize: 20.0,
+              ),
+            ),
+          )),
           Container(
             height: 150.0,
             alignment: Alignment.center,
