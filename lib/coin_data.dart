@@ -1,3 +1,7 @@
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
+
 const List<String> currenciesList = [
   'AUD',
   'BRL',
@@ -28,4 +32,12 @@ const List<String> cryptoList = [
   'LTC',
 ];
 
-class CoinData {}
+class CoinData {
+  Future getCoinData({String selectedCurrency = 'USD'}) async {
+    http.Response response =
+        await http.get('https://api.coindesk.com/v1/bpi/currentprice/$selectedCurrency.json');
+    String data = response.body;
+
+    return jsonDecode(data);
+  }
+}
